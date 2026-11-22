@@ -1,0 +1,36 @@
+name = "tagio-api"
+main = "src/index.ts"
+compatibility_date = "2026-11-01"
+compatibility_flags = ["nodejs_compat"]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "tagio"
+database_id = "REPLACE_WITH_YOUR_D1_ID"
+migrations_dir = "migrations"
+
+[[kv_namespaces]]
+binding = "KV"
+id = "REPLACE_WITH_YOUR_KV_ID"
+
+[triggers]
+# Rates every hour at :07, renewal reminders every day at 06:23 UTC.
+crons = ["7 * * * *", "23 6 * * *"]
+
+[vars]
+APP_NAME = "Tagio"
+MAIL_FROM = "Tagio <hello@tagio.app>"
+SUPPORT_EMAIL = "support@tagio.app"
+RATES_SOURCE_URL = "https://open.er-api.com/v6/latest/USD"
+ENTITLEMENT_ANY = "tagio"
+ENTITLEMENT_SHARE = "share"
+FRIEND_SLOTS = "2"
+MOVE_COOLDOWN_DAYS = "30"
+TOKEN_TTL_HOURS = "72"
+
+# Secrets (set with `wrangler secret put NAME`):
+#   TOKEN_SECRET          long random string, signs app tokens
+#   KEY_ENC_SECRET        long random string, encrypts friend keys so the owner can see them
+#   REVENUECAT_API_KEY    RevenueCat secret API key (v1 REST)
+#   REVENUECAT_WEBHOOK_AUTH  the Authorization header value you set on the RevenueCat webhook
+#   RESEND_API_KEY        Resend API key for email
