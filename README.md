@@ -23,6 +23,7 @@ Tagio is an iOS and Android app for people shopping in a currency they don't thi
 - [Plans and friend keys](#plans-and-friend-keys)
 - [Repository layout](#repository-layout)
 - [Tech stack](#tech-stack)
+- [Quick start: try it on your phone](#quick-start-try-it-on-your-phone)
 - [Getting started](#getting-started)
 - [Configuration](#configuration)
 - [Server API](#server-api)
@@ -207,6 +208,28 @@ tagio/
 | Rates | Exchange Rate API (open.er-api.com), cached hourly in KV |
 | Tests | Vitest |
 
+## Quick start: try it on your phone
+
+You can try the camera before setting up any store or server accounts. Tagio uses native camera and text-recognition code, so it can't run in the Expo Go app. It needs its own development build, which you install on a real phone.
+
+```bash
+git clone https://github.com/koomedenis40/tagio.git
+cd tagio/app
+npm install
+cp .env.example .env   # leave EXPO_PUBLIC_DEV_UNLOCK=1 to skip the paywall while developing
+```
+
+Then pick one of these:
+
+| | Android phone | iPhone |
+|---|---|---|
+| **Build on your computer** | Install Android Studio. On the phone, turn on USB debugging and plug it in. Run `npx expo run:android`. | Needs a Mac with Xcode. Plug in the iPhone and run `npx expo run:ios --device`. When Xcode asks, pick your Apple ID as the signing team. |
+| **Build in the cloud** (no Android Studio or Xcode) | `npm i -g eas-cli`, `eas login`, then `eas build --profile development --platform android`. Open the link it gives you on the phone and install the app. | Same, with `--platform ios`. Needs a paid Apple Developer account. Register your iPhone first with `eas device:create`. |
+
+With a cloud build, start the JavaScript server with `npx expo start --dev-client`. Then open the Tagio app on your phone; it connects over the same Wi-Fi.
+
+`EXPO_PUBLIC_DEV_UNLOCK` only works in development builds. Release builds ignore it.
+
 ## Getting started
 
 ### Requirements
@@ -271,6 +294,7 @@ For store builds, use [EAS Build](https://docs.expo.dev/build/introduction/): `n
 | `EXPO_PUBLIC_API_URL` | URL of the deployed Worker |
 | `EXPO_PUBLIC_REVENUECAT_IOS_KEY` | RevenueCat public SDK key for iOS (`appl_…`) |
 | `EXPO_PUBLIC_REVENUECAT_ANDROID_KEY` | RevenueCat public SDK key for Android (`goog_…`) |
+| `EXPO_PUBLIC_DEV_UNLOCK` | `1` unlocks the camera without a purchase, in development builds only |
 
 Entitlement ids, package ids, the number of friend slots and the privacy and terms URLs are in `app/src/config.ts`.
 

@@ -33,6 +33,12 @@ type Ctx = {
 };
 
 const AccessContext = createContext<Ctx | null>(null);
+/**
+ * Development only: lets you try the camera before store products and the server are set up.
+ * Ignored in release builds because __DEV__ is false there.
+ */
+const DEV_UNLOCK = __DEV__ && process.env.EXPO_PUBLIC_DEV_UNLOCK === '1';
+
 const REFRESH_BEFORE_MS = 48 * 60 * 60 * 1000; // refresh friend tokens once they have under 2 of 3 days left
 
 function ownerStateFrom(info: CustomerInfo): AccessState | null {
@@ -133,6 +139,7 @@ export function AccessProvider({ children }: { children: React.ReactNode }) {
   const access: AccessState = useMemo(() => {
     if (!ready) return { kind: 'loading' };
     if (ownerState) return ownerState;
+    if (DEV_UNLOCK) return { kind: 'owner', plan: 'share', expiresAt: null, willRenew: true };
     if (friend && friend.expiresAt > Date.now() && !friendProblem) return { kind: 'friend', expiresAt: friend.expiresAt };
     if (friendProblem) return { kind: 'none', reason: friendProblem };
     if (friend) return { kind: 'none', reason: 'key-offline' }; // token ran out while offline
