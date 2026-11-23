@@ -6,12 +6,17 @@
 
 <p align="center"><strong>Point at a price tag. See it in your money.</strong></p>
 
+<p align="center">
+  <img src="docs/hero.png" alt="Tagio: the welcome screen, the camera converting KSh 450 to $3.46, and the currency list" width="900" />
+</p>
+
 Tagio is an iOS and Android app for people shopping in a currency they don't think in yet, such as someone who has just moved abroad or is travelling. Open the app, point the camera at a price tag, and the price appears in your own currency. You don't tap anything, you don't need an account, and nothing you scan is stored.
 
 ---
 
 ## Contents
 
+- [Screens](#screens)
 - [Features](#features)
 - [How it works](#how-it-works)
 - [Privacy](#privacy)
@@ -28,6 +33,31 @@ Tagio is an iOS and Android app for people shopping in a currency they don't thi
 - [Known limitations](#known-limitations)
 
 ---
+
+## Screens
+
+These images come from the design mockups.
+
+<table>
+  <tr>
+    <td align="center" width="25%"><img src="docs/screens/scan.png" alt="Scan screen" width="200" /><br /><sub><b>Scan</b>: the price locks and converts, with the glass bar below</sub></td>
+    <td align="center" width="25%"><img src="docs/screens/scan-currency-sheet.png" alt="Currency sheet over the camera" width="200" /><br /><sub><b>Convert to</b>: tap either side for all 153 currencies</sub></td>
+    <td align="center" width="25%"><img src="docs/screens/welcome.png" alt="Welcome screen" width="200" /><br /><sub><b>Welcome</b>: pick the currency to show</sub></td>
+    <td align="center" width="25%"><img src="docs/screens/plans.png" alt="Plans screen" width="200" /><br /><sub><b>Plans</b>: Solo or Share, through the stores</sub></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="docs/screens/email.png" alt="Email screen" width="200" /><br /><sub><b>Email</b>: where friend keys, receipts and reminders go</sub></td>
+    <td align="center"><img src="docs/screens/friend-keys.png" alt="Friend keys screen" width="200" /><br /><sub><b>Friend keys</b>: 2 keys to copy or share</sub></td>
+    <td align="center"><img src="docs/screens/redeem.png" alt="Redeem a friend key" width="200" /><br /><sub><b>Redeem</b>: a friend unlocks with a key</sub></td>
+    <td align="center"><img src="docs/screens/settings.png" alt="Settings screen" width="200" /><br /><sub><b>Settings</b>: currencies, rounding, plan and friend slots</sub></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="docs/screens/currency.png" alt="Currency picker" width="200" /><br /><sub><b>Currency picker</b>: suggested, then A–Z with search</sub></td>
+    <td align="center"><img src="docs/screens/access-ended.png" alt="Access ended" width="200" /><br /><sub><b>Access ended</b>: renew or use a friend key</sub></td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
 
 ## Features
 
@@ -127,6 +157,7 @@ sequenceDiagram
 
 ```
 tagio/
+├── docs/                       README images (hero and screens)
 ├── app/                        Expo app (iOS + Android)
 │   ├── app/                    Screens (Expo Router)
 │   │   ├── index.tsx           Gate: camera if you have access, else Welcome
